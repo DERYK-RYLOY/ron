@@ -1,0 +1,352 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>RON — Typeface Showcase</title>
+<style>
+  @font-face { font-family: 'RON Black'; src: url('file:///C:/Users/Admin/Downloads/ron/dist/RON-Black.woff2') format('woff2'), url('file:///C:/Users/Admin/Downloads/ron/dist/RON-Black.otf') format('opentype'); }
+  @font-face { font-family: 'RON Mono';  src: url('file:///C:/Users/Admin/Downloads/ron/dist/RON-Mono.woff2')  format('woff2'), url('file:///C:/Users/Admin/Downloads/ron/dist/RON-Mono.otf')  format('opentype'); }
+  @font-face { font-family: 'RON Dot';   src: url('file:///C:/Users/Admin/Downloads/ron/dist/RON-Dot.woff2')   format('woff2'), url('file:///C:/Users/Admin/Downloads/ron/dist/RON-Dot.otf')   format('opentype'); }
+  @font-face { font-family: 'RON Scan';  src: url('file:///C:/Users/Admin/Downloads/ron/dist/RON-Scan.woff2')  format('woff2'), url('file:///C:/Users/Admin/Downloads/ron/dist/RON-Scan.otf')  format('opentype'); }
+  @font-face { font-family: 'RON Outline'; src: url('file:///C:/Users/Admin/Downloads/ron/dist/RON-Outline.woff2') format('woff2'), url('file:///C:/Users/Admin/Downloads/ron/dist/RON-Outline.otf') format('opentype'); }
+
+  :root {
+    --bg: #0b0b0c; --panel: #141416; --panel2: #1a1a1d;
+    --text: #f2f2ed; --dim: #8b8b85; --acid: #d8ff3a; --line: #232327;
+  }
+  @page { size: A4; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: #555; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  .page {
+    position: relative; width: 210mm; height: 297mm; overflow: hidden;
+    background: var(--bg); color: var(--text);
+    padding: 13mm 15mm 18mm; page-break-after: always; break-after: page;
+  }
+  .page:last-child { page-break-after: auto; }
+
+  .foot {
+    position: absolute; left: 15mm; right: 15mm; bottom: 8mm;
+    display: flex; justify-content: space-between; align-items: baseline;
+    border-top: 0.4pt solid var(--line); padding-top: 4mm;
+    font-size: 6.5pt; letter-spacing: 0.22em; color: var(--dim); text-transform: uppercase;
+  }
+  .foot b { color: var(--acid); font-weight: 600; }
+
+  .kicker { color: var(--acid); font-size: 8pt; letter-spacing: 0.42em; text-transform: uppercase; }
+  .rule { height: 0.4pt; background: var(--line); margin: 7mm 0; }
+
+  /* ---------- cover ---------- */
+  .cover-top { display: flex; justify-content: space-between; font-size: 8pt; letter-spacing: 0.3em; text-transform: uppercase; color: var(--dim); }
+  .cover-word { text-align: center; margin-top: 30mm; }
+  .cover-word h1 { font-family: 'RON Black'; font-size: 208pt; line-height: 1; letter-spacing: 0.01em; }
+  .cover-word h1 span { color: var(--acid); }
+  .cover-tag { font-size: 12pt; letter-spacing: 0.1em; color: var(--text); text-transform: uppercase; margin-top: 13mm; line-height: 1.6; }
+  .cover-sub { margin-top: 5mm; color: var(--dim); font-size: 8pt; letter-spacing: 0.36em; text-transform: uppercase; }
+  .cover-skins { margin-top: 10mm; color: var(--acid); font-size: 7.5pt; letter-spacing: 0.5em; text-transform: uppercase; }
+  .cover-skins em { font-style: normal; color: var(--dim); }
+  .cover-bottom { position: absolute; left: 15mm; right: 15mm; bottom: 10mm; border-top: 0.4pt solid var(--line); padding-top: 6mm; display: flex; justify-content: space-between; align-items: center; }
+  .cover-bottom div { font-size: 7pt; letter-spacing: 0.28em; text-transform: uppercase; color: var(--dim); }
+  .cover-bottom strong { color: var(--text); }
+
+  /* ---------- contents ---------- */
+  .two-col { display: flex; gap: 10mm; }
+  .toc { flex: 1.05; }
+  .toc h2, .aside h3, h2.sec { font-family: 'RON Black'; letter-spacing: 0.03em; }
+  .toc h2 { font-size: 34pt; margin: 4mm 0 8mm; }
+  .toc ol { list-style: none; }
+  .toc li { display: flex; justify-content: space-between; border-bottom: 0.4pt solid var(--line); padding: 5.2mm 1mm; font-size: 10.5pt; letter-spacing: 0.06em; }
+  .toc li span { color: var(--dim); font-family: 'Cascadia Code', Consolas, monospace; }
+  .toc li:last-child { border-bottom: 0; }
+  .aside { flex: 1; }
+  .panel { background: var(--panel); border: 0.4pt solid var(--line); padding: 7mm; }
+  .aside h3 { font-size: 10pt; color: var(--acid); letter-spacing: 0.24em; margin-bottom: 5mm; text-transform: uppercase; }
+  .origin-row { display: flex; align-items: center; gap: 6mm; }
+  .origin-row img { width: 17mm; height: 17mm; image-rendering: pixelated; background: #fff; border-radius: 2mm; padding: 2mm; }
+  .arrow { color: var(--acid); font-size: 16pt; }
+  .origin-cap { margin-top: 5mm; color: var(--dim); font-size: 8.5pt; line-height: 1.7; }
+  .install { margin-top: 6mm; font-family: 'Cascadia Code', Consolas, monospace; font-size: 7pt; color: var(--text); background: var(--panel2); border: 0.4pt solid var(--line); padding: 5mm 6mm; line-height: 1.8; }
+  .install .cm { color: var(--acid); }
+
+  /* ---------- theme pages ---------- */
+  .theme-head { display: flex; justify-content: space-between; align-items: center; }
+  .theme-name { font-size: 64pt; letter-spacing: 0.02em; line-height: 1; }
+  .f-mono.theme-name { font-size: 42pt; }
+  .f-outline.theme-name { font-size: 46pt; }
+  .f-black { font-family: 'RON Black'; } .f-mono { font-family: 'RON Mono'; } .f-dot { font-family: 'RON Dot'; }
+  .f-scan { font-family: 'RON Scan'; } .f-outline { font-family: 'RON Outline'; }
+  .tag { border: 1pt solid var(--acid); color: var(--acid); border-radius: 999px; padding: 2.2mm 5mm; font-size: 7pt; letter-spacing: 0.3em; text-transform: uppercase; white-space: nowrap; }
+  .theme-desc { color: var(--dim); font-size: 10.5pt; line-height: 1.75; max-width: 150mm; margin-top: 6mm; }
+  .theme-desc b { color: var(--text); font-weight: 600; }
+  .ron-huge { text-align: center; font-size: 150pt; line-height: 1.05; margin: 9mm 0 4mm; letter-spacing: 0.04em; }
+  .ron-huge span { color: var(--acid); }
+  .alpha { text-align: center; font-size: 15.5pt; letter-spacing: 0.3em; line-height: 2.3; }
+  .alpha-dim { text-align: center; font-size: 12pt; letter-spacing: 0.18em; color: var(--dim); margin-top: 4mm; line-height: 2; }
+  .pull { text-align: center; font-size: 25pt; letter-spacing: 0.05em; color: var(--text); margin-top: 10mm; }
+  .pull em { font-style: normal; color: var(--acid); }
+  .code { margin-top: 9mm; background: var(--panel2); border: 0.4pt solid var(--line); padding: 6mm 7mm; font-family: 'Cascadia Code', Consolas, monospace; font-size: 8pt; color: #c8c8c2; line-height: 1.9; }
+  .code::after { content: "UPM 1000  ·  CAP 620  ·  WGHT 900  ·  CFF OUTLINES"; display: block; text-align: center; margin-top: 6mm; padding-top: 5mm; border-top: 0.4pt solid var(--line); color: var(--dim); font-family: 'Segoe UI', sans-serif; font-size: 6pt; letter-spacing: 0.34em; }
+  .code .cm { color: var(--acid); }
+
+  /* ---------- alphabet grid ---------- */
+  .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 3mm; margin-top: 7mm; }
+  .cell { background: var(--panel); border: 0.4pt solid var(--line); padding: 4mm 1mm 3mm; text-align: center; }
+  .cell div { font-family: 'RON Black'; font-size: 17pt; }
+  .cell span { display: block; color: var(--dim); font-size: 4.6pt; margin-top: 2mm; font-family: 'Cascadia Code', monospace; }
+  .pangram { margin-top: 8mm; text-align: center; font-family: 'RON Black'; font-size: 11.5pt; letter-spacing: 0.12em; line-height: 2.2; }
+  .small-note { color: var(--dim); font-size: 8pt; text-align: center; margin-top: 4mm; letter-spacing: 0.06em; }
+
+  /* ---------- specs page ---------- */
+  .spec-grid { display: flex; gap: 8mm; margin-top: 6mm; }
+  .spec-grid > div { flex: 1; }
+  table { width: 100%; border-collapse: collapse; font-size: 8.6pt; }
+  td { padding: 4.6mm 2mm; border-bottom: 0.4pt solid var(--line); }
+  td:first-child { color: var(--dim); }
+  td:last-child { font-family: 'Cascadia Code', monospace; text-align: right; }
+  .box { background: var(--panel); border: 0.4pt solid var(--line); padding: 6mm 7mm; margin-bottom: 6mm; }
+  .box h4 { font-size: 8pt; color: var(--acid); letter-spacing: 0.24em; text-transform: uppercase; margin-bottom: 3.5mm; }
+  .box p, .box li { font-size: 8.6pt; color: var(--text); line-height: 1.8; }
+  .box ul { margin-left: 5mm; }
+  .box .dim { color: var(--dim); }
+  .close-word { text-align: center; margin-top: 10mm; }
+  .close-word .w { font-family: 'RON Black'; font-size: 72pt; letter-spacing: 0.02em; }
+  .close-word .w span { color: var(--acid); }
+  .close-word .c { margin-top: 3mm; color: var(--dim); font-size: 7pt; letter-spacing: 0.34em; text-transform: uppercase; }
+</style>
+</head>
+<body>
+
+<!-- ============ 01 · COVER ============ -->
+<section class="page cover">
+  <div class="cover-top"><span>Ron Type</span><span>Est. 2026 — SIL OFL</span></div>
+  <div class="cover-word">
+    <h1>R<span>O</span>N</h1>
+    <div class="cover-tag">The display typeface for developers<br>who ship taste</div>
+    <div class="cover-sub">Typeface showcase · v1.0</div>
+    <div class="cover-skins">Black <em>·</em> Mono <em>·</em> Dot <em>·</em> Scan <em>·</em> Outline</div>
+  </div>
+  <div class="cover-bottom">
+    <div><strong>RON Type</strong><br>Showcase</div>
+    <div style="text-align:center"><strong>Five themes</strong><br>One skeleton</div>
+    <div style="text-align:right"><strong>Otf · Woff2</strong><br>Cff outlines</div>
+  </div>
+</section>
+
+<!-- ============ 02 · CONTENTS / ORIGIN ============ -->
+<section class="page">
+  <div class="kicker">Contents</div>
+  <div class="two-col" style="margin-top:8mm">
+    <div class="toc">
+      <h2>RON,<br>IN FIVE<br>SKINS</h2>
+      <ol>
+        <li>01 <span>Five skins, one skeleton</span></li>
+        <li>02 <span>RON Black — Flagship</span></li>
+        <li>03 <span>RON Mono — Terminal</span></li>
+        <li>04 <span>RON Dot — Braille</span></li>
+        <li>05 <span>RON Scan — CRT</span></li>
+        <li>06 <span>RON Outline — Hollow</span></li>
+        <li>07 <span>The alphabet</span></li>
+        <li>08 <span>Specs &amp; license</span></li>
+      </ol>
+    </div>
+    <div class="aside">
+      <div class="panel">
+        <h3>From bitmap to vector</h3>
+        <div class="origin-row">
+          <img src="file:///C:/Users/Admin/Downloads/ron/a.png" alt="source A">
+          <img src="file:///C:/Users/Admin/Downloads/ron/15_O.png" alt="source O">
+          <img src="file:///C:/Users/Admin/Downloads/ron/13_M.png" alt="source M">
+        </div>
+        <div class="origin-cap">
+          Ron began as a hand-cut 61×61 bitmap alphabet — forty-eight glyphs of chamfered,
+          negative-space geometry. Every RON file ships the same skeleton, traced to Bézier
+          outlines and re-rendered five ways. No blur. No hinting compromises. Just weight.
+        </div>
+        <div class="install">
+          <span class="cm">// use it from css in 6 lines</span><br>
+          @font-face {<br>
+          &nbsp;&nbsp;font-family: 'RON Black';<br>
+          &nbsp;&nbsp;src: url('RON-Black.woff2') format('woff2');<br>
+          }<br>
+          .hero { font-family: 'RON Black'; }
+        </div>
+      </div>
+      <p style="margin-top:6mm; color:var(--dim); font-size:8.5pt; line-height:1.8">Lowercase maps to caps by design — Ron is an all-caps display face that refuses to whisper.</p>
+    </div>
+  </div>
+  <div class="foot"><span><b>Ron Type</b> — showcase</span><span>02 / 09</span></div>
+</section>
+
+<!-- ============ 03 · RON BLACK ============ -->
+<section class="page">
+  <div class="theme-head">
+    <div class="theme-name f-black">RON BLACK</div>
+    <div class="tag">Flagship</div>
+  </div>
+  <p class="theme-desc">The original cut. Heavy chamfered caps with stencil-style negative space — <b>headlines that hit like a merge conflict with a fixed bug.</b> If Ron were a git flag, it would be <b>--force</b>.</p>
+
+  <div class="ron-huge f-black">R<span>O</span>N</div>
+
+  <div class="rule"></div>
+  <div class="alpha f-black">A B C D E F G H I J K L M<br>N O P Q R S T U V W X Y Z</div>
+  <div class="alpha-dim f-black">0 1 2 3 4 5 6 7 8 9 &nbsp;. , ! / * &ldquo; &rdquo; &amp; # : ; ( ) [ ] - _ '</div>
+
+  <div class="pull f-black">SHIP IT.<em> REPEAT.</em></div>
+
+  <div class="code"><span class="cm">// ron black, committed to the hero section</span><br>git commit -m "feat: first stable release"</div>
+  <div class="foot"><span><b>02</b> — Ron Black · flagship</span><span>03 / 09</span></div>
+</section>
+
+<!-- ============ 04 · RON MONO ============ -->
+<section class="page">
+  <div class="theme-head">
+    <div class="theme-name f-mono">RON MONO</div>
+    <div class="tag">Terminal</div>
+  </div>
+  <p class="theme-desc">Ron, <b>fixed at 980 units per advance</b> and every glyph centered. Built for code panels, status bars, CLI banners and anywhere columns must hold their nerve.</p>
+
+  <div class="ron-huge f-mono">R<span>O</span>N</div>
+
+  <div class="rule"></div>
+  <div class="alpha f-mono">A B C D E F G H I J K L M<br>N O P Q R S T U V W X Y Z</div>
+  <div class="alpha-dim f-mono">0 1 2 3 4 5 6 7 8 9 &nbsp;. , ! / * &ldquo; &rdquo; &amp; # : ; ( ) [ ] - _ '</div>
+
+  <div class="pull f-mono">git commit <em>-m</em> RON</div>
+
+  <div class="code"><span class="cm">// monospaced, gridlocked, zero drift</span><br>$ node braille.js "SHIP IT"<br>[############] 100% shipped</div>
+  <div class="foot"><span><b>03</b> — Ron Mono · terminal</span><span>04 / 09</span></div>
+</section>
+
+<!-- ============ 05 · RON DOT ============ -->
+<section class="page">
+  <div class="theme-head">
+    <div class="theme-name f-dot">RON DOT</div>
+    <div class="tag">Braille</div>
+  </div>
+  <p class="theme-desc">A <b>dot-matrix halftone</b> re-render of the alphabet. Screens that boot, boards that flip, juries that lean in — loading states have never looked this expensive.</p>
+
+  <div class="ron-huge f-dot">R<span>O</span>N</div>
+
+  <div class="rule"></div>
+  <div class="alpha f-dot">A B C D E F G H I J K L M<br>N O P Q R S T U V W X Y Z</div>
+  <div class="alpha-dim f-dot">0 1 2 3 4 5 6 7 8 9 &nbsp;. , ! / * &amp; # : ; ( ) [ ] - _ '</div>
+
+  <div class="pull f-dot">LOADING <em>SPRINT</em> 0123</div>
+
+  <div class="code"><span class="cm">// dot matrix for the impatient</span><br>$ ron dot build --release<br>[############] 100% shipped</div>
+  <div class="foot"><span><b>04</b> — Ron Dot · braille halftone</span><span>05 / 09</span></div>
+</section>
+
+<!-- ============ 06 · RON SCAN ============ -->
+<section class="page">
+  <div class="theme-head">
+    <div class="theme-name f-scan">RON SCAN</div>
+    <div class="tag">Crt</div>
+  </div>
+  <p class="theme-desc"><b>Horizontal scanlines</b> clipped to the RON skeleton. For retro-computing interfaces, haunted toggle switches, and any product that remembers phosphor.</p>
+
+  <div class="ron-huge f-scan">R<span>O</span>N</div>
+
+  <div class="rule"></div>
+  <div class="alpha f-scan">A B C D E F G H I J K L M<br>N O P Q R S T U V W X Y Z</div>
+  <div class="alpha-dim f-scan">0 1 2 3 4 5 6 7 8 9 &nbsp;. , ! / * &amp; # : ; ( ) [ ] - _ '</div>
+
+  <div class="pull f-scan">INSERT COIN <em>TO SHIP</em></div>
+
+  <div class="code"><span class="cm">// crt nostalgia, fresh commit</span><br>$ ron scan --theme crt deploy<br>&gt; rendering vectors @ 60hz</div>
+  <div class="foot"><span><b>05</b> — Ron Scan · crt scanlines</span><span>06 / 09</span></div>
+</section>
+
+<!-- ============ 07 · RON OUTLINE ============ -->
+<section class="page">
+  <div class="theme-head">
+    <div class="theme-name f-outline">RON OUTLINE</div>
+    <div class="tag">Hollow</div>
+  </div>
+  <p class="theme-desc"><b>The ring only</b> — RON Black's silhouette stroked hollow. Watermarks, layered titles, ghost states: for interfaces that need depth without more ink.</p>
+
+  <div class="ron-huge f-outline">R<span>O</span>N</div>
+
+  <div class="rule"></div>
+  <div class="alpha f-outline">A B C D E F G H I J K L M<br>N O P Q R S T U V W X Y Z</div>
+  <div class="alpha-dim f-outline">0 1 2 3 4 5 6 7 8 9 &nbsp;. , ! / * &amp; # : ; ( ) [ ] - _ '</div>
+
+  <div class="pull f-outline">GHOST <em>IN THE PIPELINE</em></div>
+
+  <div class="code"><span class="cm">// hollow for the depth trick</span><br>$ ron outline export --layers<br>watermark.png ✓</div>
+  <div class="foot"><span><b>06</b> — Ron Outline · hollow rings</span><span>07 / 09</span></div>
+</section>
+
+<!-- ============ 08 · THE ALPHABET ============ -->
+<section class="page">
+  <div class="kicker">07 — The alphabet</div>
+  <h2 class="sec f-black" style="font-size:44pt; margin-top:4mm">EVERY<br>GLYPH</h2>
+  <p style="color:var(--dim); font-size:9.5pt; margin-top:4mm; line-height:1.7">A–Z, 0–9 and the punctuation a developer touches daily. Caps-only by design; lowercase maps to caps. CFF outlines, nonzero winding, traced from the original art.</p>
+  <div class="grid" id="grid"></div>
+  <div class="pangram">THE QUICK BROWN FOX JUMPS<br>OVER THE LAZY DOG<br>0123456789 . , ! / * &amp; # : ; ( ) [ ] - _ ' "</div>
+  <div class="small-note">82 glyphs per theme · advances proportional (RON Mono is fixed) · cmap covers Latin-1 punctuation</div>
+  <div class="foot"><span><b>07</b> — the alphabet</span><span>08 / 09</span></div>
+</section>
+
+<!-- ============ 09 · SPECS & LICENSE ============ -->
+<section class="page">
+  <div class="kicker">08 — Specs &amp; license</div>
+  <div class="spec-grid">
+    <div>
+      <div class="box">
+        <h4>Type specs</h4>
+        <table>
+          <tr><td>Outlines</td><td>CFF · cubic Bézier</td></tr>
+          <tr><td>Units per em</td><td>1000</td></tr>
+          <tr><td>Cap height</td><td>620</td></tr>
+          <tr><td>Ascender / descender</td><td>810 / −280</td></tr>
+          <tr><td>Weight class</td><td>900 — Black</td></tr>
+          <tr><td>Advances</td><td>proportional · RON Mono fixed 980</td></tr>
+          <tr><td>Vendor / designer</td><td>ROND · RON Type</td></tr>
+          <tr><td>Glyphs</td><td>82 per theme</td></tr>
+          <tr><td>Not yet drawn</td><td>@ = % ?</td></tr>
+        </table>
+      </div>
+      <div class="box">
+        <h4>In the box</h4>
+        <p class="dim">RON-Black / RON-Mono / RON-Dot / RON-Scan / RON-Outline<br>
+        .otf 12–120 KB · .woff2 3–9 KB · specimen site · build pipeline · braille tool · OFL</p>
+      </div>
+    </div>
+    <div>
+      <div class="box">
+        <h4>SIL Open Font License 1.1</h4>
+        <p>Ron is free to use, study, modify, embed and redistribute — including in commercial products. You may not sell the font files by themselves, and derivatives must remain under the OFL.</p>
+      </div>
+      <div class="box">
+        <h4>Roadmap</h4>
+        <ul>
+          <li>Kerning (GPOS) and a proper hinting pass</li>
+          <li><b>@ = % ?</b> and stencil-break alternates</li>
+          <li>Cyrillic &amp; Greek companions</li>
+          <li>Variable font — wght axis</li>
+          <li>COLR neon theme</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h4>Install</h4>
+        <p class="dim">Windows — right-click the .otf → Install.<br>macOS — open → Install Font.<br>Web — @font-face with the .woff2 from dist/.</p>
+      </div>
+    </div>
+  </div>
+  <div class="close-word">
+    <div class="w">SET IN <span>RON</span>.</div>
+    <div class="c">Obviously — Ron Type · ROND · 2026</div>
+  </div>
+  <div class="foot"><span><b>08</b> — specs &amp; license</span><span>09 / 09</span></div>
+</section>
+
+<script>
+  const grid = document.getElementById('grid');
+  const hex = ch => 'U+' + ch.codePointAt(0).toString(16).toUpperCase().padStart(4, '0');
+  const glyphs = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789&#.,!/':;()[]-_*\"".split('');
+  grid.innerHTML = glyphs.map(g => `<div class="cell"><div>${g === '&' ? '&amp;' : g === '<' ? '&lt;' : g}</div><span>${hex(g)}</span></div>`).join('');
+</script>
+</body>
+</html>

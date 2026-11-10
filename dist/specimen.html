@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RON — The Display Typeface for Developers Who Ship Taste</title>
+<style>
+  @font-face { font-family: 'RON Black'; src: url('RON-Black.woff2') format('woff2'), url('RON-Black.otf') format('opentype'); }
+  @font-face { font-family: 'RON Mono';  src: url('RON-Mono.woff2')  format('woff2'), url('RON-Mono.otf')  format('opentype'); }
+  @font-face { font-family: 'RON Dot';   src: url('RON-Dot.woff2')   format('woff2'), url('RON-Dot.otf')   format('opentype'); }
+  @font-face { font-family: 'RON Scan';  src: url('RON-Scan.woff2')  format('woff2'), url('RON-Scan.otf')  format('opentype'); }
+  @font-face { font-family: 'RON Outline'; src: url('RON-Outline.woff2') format('woff2'), url('RON-Outline.otf') format('opentype'); }
+
+  :root {
+    --bg: #0b0b0c; --panel: #141416; --panel-2: #1a1a1d;
+    --text: #f2f2ed; --dim: #8b8b85; --acid: #d8ff3a; --line: #232327;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
+
+  nav { display: flex; justify-content: space-between; align-items: center; padding: 22px 0; border-bottom: 1px solid var(--line); }
+  .wordmark { font-family: 'RON Black'; font-size: 26px; letter-spacing: .12em; color: var(--text); }
+  .wordmark span { color: var(--acid); }
+  nav ul { display: flex; gap: 28px; list-style: none; font-size: 13px; color: var(--dim); }
+  nav a { color: var(--dim); text-decoration: none; } nav a:hover { color: var(--text); }
+  .pill { border: 1px solid var(--acid); color: var(--acid); padding: 7px 14px; border-radius: 999px; font-size: 12px; text-decoration: none; letter-spacing: .04em; }
+
+  header.hero { padding: 72px 0 56px; text-align: center; border-bottom: 1px solid var(--line); }
+  .kicker { color: var(--acid); font-size: 12px; letter-spacing: .35em; text-transform: uppercase; margin-bottom: 26px; }
+  .hero-word { font-family: 'RON Black'; font-size: clamp(140px, 24vw, 300px); line-height: .95; letter-spacing: .02em; }
+  .hero-word span { color: var(--acid); }
+  .tagline { font-size: clamp(19px, 2.4vw, 26px); margin-top: 30px; color: var(--text); }
+  .sub { color: var(--dim); max-width: 620px; margin: 16px auto 0; font-size: 15px; line-height: 1.65; }
+  .cta-row { margin-top: 34px; display: flex; gap: 14px; justify-content: center; }
+  .btn { font-family: 'RON Black'; letter-spacing: .08em; padding: 16px 30px; font-size: 15px; text-decoration: none; color: #0b0b0c; background: var(--acid); border: 1px solid var(--acid); }
+  .btn.ghost { background: transparent; color: var(--acid); }
+
+  .stats { display: flex; justify-content: center; gap: 54px; padding: 26px 0; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .stat b { font-family: 'RON Black'; font-size: 22px; letter-spacing: .04em; display: block; }
+  .stat i { color: var(--dim); font-style: normal; font-size: 12px; }
+
+  section { padding: 64px 0; border-bottom: 1px solid var(--line); }
+  h2.sec { font-family: 'RON Black'; font-size: clamp(34px, 5vw, 54px); letter-spacing: .02em; margin-bottom: 8px; }
+  p.sec-sub { color: var(--dim); margin-bottom: 36px; max-width: 640px; line-height: 1.6; }
+
+  .themes { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 18px; }
+  .theme-card { background: var(--panel); border: 1px solid var(--line); padding: 28px; display: flex; flex-direction: column; gap: 18px; min-height: 220px; }
+  .theme-card h3 { font-family: 'RON Black'; font-size: 16px; letter-spacing: .18em; color: var(--acid); display: flex; justify-content: space-between; }
+  .theme-card h3 em { color: var(--dim); font-style: normal; letter-spacing: .05em; font-size: 11px; align-self: center; }
+  .glyph-line { font-size: clamp(44px, 6vw, 64px); line-height: 1.15; white-space: nowrap; overflow: hidden; }
+  .f-black   { font-family: 'RON Black'; }
+  .f-mono    { font-family: 'RON Mono'; }
+  .f-dot     { font-family: 'RON Dot'; }
+  .f-scan    { font-family: 'RON Scan'; }
+  .f-outline { font-family: 'RON Outline'; }
+  .theme-desc { color: var(--dim); font-size: 13px; line-height: 1.55; margin-top: auto; }
+
+  .wild { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media (max-width: 900px) { .wild { grid-template-columns: 1fr; } }
+  .code-panel { background: var(--panel-2); border: 1px solid var(--line); padding: 22px 24px; }
+  .code-panel .dots { display: flex; gap: 6px; margin-bottom: 16px; }
+  .code-panel .dots i { width: 11px; height: 11px; border-radius: 50%; background: #2c2c30; }
+  .code-panel pre { font-family: 'Cascadia Code', 'SF Mono', Consolas, monospace; font-size: 13px; line-height: 1.75; color: #c8c8c2; }
+  .code-panel .kw { color: #ff7ab8; } .code-panel .str { color: var(--acid); } .code-panel .cm { color: #5b5b56; }
+  .wild-big { background: var(--panel); border: 1px solid var(--line); display: flex; flex-direction: column; justify-content: center; padding: 30px; }
+  .wild-big .line { font-family: 'RON Mono'; font-size: clamp(20px, 2.6vw, 28px); margin: 10px 0; color: var(--text); }
+  .wild-big .dollar { color: var(--acid); }
+
+  .glyph-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: 10px; }
+  .cell { background: var(--panel); border: 1px solid var(--line); padding: 14px 8px 10px; text-align: center; }
+  .cell div { font-family: 'RON Black'; font-size: 34px; }
+  .cell span { display: block; color: var(--dim); font-size: 10px; margin-top: 8px; font-family: 'Cascadia Code', monospace; }
+
+  .spec-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .spec-table td { padding: 13px 6px; border-bottom: 1px solid var(--line); }
+  .spec-table td:first-child { color: var(--dim); width: 260px; }
+  .spec-table td:last-child { font-family: 'Cascadia Code', monospace; color: var(--text); }
+
+  footer { padding: 56px 0 80px; text-align: center; color: var(--dim); font-size: 13px; line-height: 1.9; }
+  footer b { color: var(--text); }
+  .foot-word { font-family: 'RON Black'; font-size: 40px; color: var(--text); margin-bottom: 18px; }
+  .foot-word span { color: var(--acid); }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <nav>
+    <div class="wordmark">R<span>O</span>N</div>
+    <ul>
+      <li><a href="#themes">Themes</a></li>
+      <li><a href="#glyphs">Glyphs</a></li>
+      <li><a href="#specs">Specs</a></li>
+    </ul>
+    <a class="pill" href="#download">GET RON</a>
+  </nav>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Display Typeface · v1.0 · SIL OFL</div>
+    <h1 class="hero-word">R<span>O</span>N</h1>
+    <p class="tagline">The display typeface for developers who ship taste.</p>
+    <p class="sub">An all-caps grotesque engineered for terminals, editors, launch pages and loud brand systems — drawn from a hand-cut bitmap alphabet, traced to solid vectors, and released free under the SIL Open Font License.</p>
+    <div class="cta-row">
+      <a class="btn" href="#download" id="download">DOWNLOAD RON</a>
+      <a class="btn ghost" href="#themes">MEET THE THEMES</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="stats">
+    <div class="stat"><b>05</b><i>THEMES, ONE DNA</i></div>
+    <div class="stat"><b>82</b><i>GLYPHS PER THEME</i></div>
+    <div class="stat"><b>900</b><i>BLACK WEIGHT</i></div>
+    <div class="stat"><b>OFL</b><i>FREE FOREVER</i></div>
+  </div>
+</div>
+
+<section id="themes">
+  <div class="wrap">
+    <h2 class="sec">FIVE SKINS, ONE SKELETON</h2>
+    <p class="sec-sub">Every RON theme shares the same underlying geometry — the same chamfered corners, the same aggressive proportions — re-rendered for a different job.</p>
+    <div class="themes">
+      <div class="theme-card">
+        <h3>RON BLACK <em>FLAGSHIP</em></h3>
+        <div class="glyph-line f-black">RON 0123</div>
+        <div class="theme-desc">The original. Heavy, chamfered, unapologetic. Headlines that hit like a merge conflict with a fixed bug.</div>
+      </div>
+      <div class="theme-card">
+        <h3>RON MONO <em>TERMINAL</em></h3>
+        <div class="glyph-line f-mono">RON 0123</div>
+        <div class="theme-desc">Ron is monospaced here — same advances for every glyph, centered. Built for code panels, status bars and CLI banners.</div>
+      </div>
+      <div class="theme-card">
+        <h3>RON DOT <em>BRAILLE</em></h3>
+        <div class="glyph-line f-dot">RON 0123</div>
+        <div class="theme-desc">A dot-matrix halftone of the same alphabet. Loading screens, sprint boards and Awwwards juries' guilty pleasures.</div>
+      </div>
+      <div class="theme-card">
+        <h3>RON SCAN <em>CRT</em></h3>
+        <div class="glyph-line f-scan">RON 0123</div>
+        <div class="theme-desc">Horizontal scanlines clipped to the RON skeleton. For retro-computing interfaces and haunted toggle switches.</div>
+      </div>
+      <div class="theme-card">
+        <h3>RON OUTLINE <em>HOLLOW</em></h3>
+        <div class="glyph-line f-outline">RON 0123</div>
+        <div class="theme-desc">The ring only, stroked in RON Black's silhouette. Watermarks, ghost layers and layered titles with depth.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="wild">
+  <div class="wrap">
+    <h2 class="sec">IN THE WILD</h2>
+    <p class="sec-sub">RON ships as plain OpenType files — drop them into any editor, terminal, site or splash screen.</p>
+    <div class="wild">
+      <div class="code-panel">
+        <div class="dots"><i></i><i></i><i></i></div>
+<pre><span class="cm">// ron, committed to your terminal</span>
+git commit <span class="kw">-m</span> <span class="str">"feat: RON everywhere"</span>
+<span class="cm">// install the whole family</span>
+git clone ron-type   <span class="cm">// 5 themes, one DNA</span></pre>
+      </div>
+      <div class="wild-big">
+        <div class="line"><span class="dollar">$</span> npm i ron-type</div>
+        <div class="line"><span class="dollar">$</span> ron dot build</div>
+        <div class="line"><span class="dollar">$</span> localhost:3000</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="glyphs">
+  <div class="wrap">
+    <h2 class="sec">THE ALPHABET</h2>
+    <p class="sec-sub">A–Z, 0–9, and the punctuation a developer actually touches. Caps-only by design; lowercase maps to caps.</p>
+    <div class="glyph-grid" id="grid"></div>
+  </div>
+</section>
+
+<section id="specs">
+  <div class="wrap">
+    <h2 class="sec">SPEC SHEET</h2>
+    <p class="sec-sub">No surprises. Solid vectors, sane metrics, installable everywhere.</p>
+    <table class="spec-table">
+      <tr><td>Outlines</td><td>CFF, cubic Bézier</td></tr>
+      <tr><td>Units per em</td><td>1000</td></tr>
+      <tr><td>Cap height</td><td>620</td></tr>
+      <tr><td>Ascender / Descender</td><td>810 / −280</td></tr>
+      <tr><td>Weight class</td><td>900 (Black)</td></tr>
+      <tr><td>Advances</td><td>proportional — RON Mono is fixed 980</td></tr>
+      <tr><td>Kana / Cyrillic / Greek</td><td>not yet — PRs welcome</td></tr>
+      <tr><td>License</td><td>SIL Open Font License 1.1</td></tr>
+      <tr><td>Designer / Vendor</td><td>RON TYPE · ROND</td></tr>
+      <tr><td>Not yet drawn</td><td>@ = % ? — PRs welcome, OFL forever</td></tr>
+    </table>
+  </div>
+</section>
+
+<section id="download">
+  <div class="wrap">
+    <h2 class="sec">TAKE RON WITH YOU</h2>
+    <p class="sec-sub">Plain OpenType and WOFF2 files. Install them on your OS, drop them into your design tool, or preload them on the web. No signup, no paywall — SIL OFL means it stays free, forever.</p>
+    <table class="spec-table">
+      <tr><td>RON Black — flagship</td><td><a href="RON-Black.otf" download style="color:var(--acid);text-decoration:none">RON-Black.otf</a> · 13 KB &nbsp;|&nbsp; <a href="RON-Black.woff2" download style="color:var(--acid);text-decoration:none">RON-Black.woff2</a> · 6 KB</td></tr>
+      <tr><td>RON Mono — terminal</td><td><a href="RON-Mono.otf" download style="color:var(--acid);text-decoration:none">RON-Mono.otf</a> · 13 KB &nbsp;|&nbsp; <a href="RON-Mono.woff2" download style="color:var(--acid);text-decoration:none">RON-Mono.woff2</a> · 6 KB</td></tr>
+      <tr><td>RON Dot — braille halftone</td><td><a href="RON-Dot.otf" download style="color:var(--acid);text-decoration:none">RON-Dot.otf</a> · 120 KB &nbsp;|&nbsp; <a href="RON-Dot.woff2" download style="color:var(--acid);text-decoration:none">RON-Dot.woff2</a> · 3 KB</td></tr>
+      <tr><td>RON Scan — CRT scanlines</td><td><a href="RON-Scan.otf" download style="color:var(--acid);text-decoration:none">RON-Scan.otf</a> · 52 KB &nbsp;|&nbsp; <a href="RON-Scan.woff2" download style="color:var(--acid);text-decoration:none">RON-Scan.woff2</a> · 5 KB</td></tr>
+      <tr><td>RON Outline — hollow rings</td><td><a href="RON-Outline.otf" download style="color:var(--acid);text-decoration:none">RON-Outline.otf</a> · 21 KB &nbsp;|&nbsp; <a href="RON-Outline.woff2" download style="color:var(--acid);text-decoration:none">RON-Outline.woff2</a> · 9 KB</td></tr>
+    </table>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-word">R<span>O</span>N</div>
+    <p><b>RON typeface v1.0</b> — traced from the original bitmap drawings.<br>
+    Licensed under the SIL Open Font License 1.1. Use it in products, ship it in apps, embed it on sites — just don't sell the font itself.<br>
+    Set in RON. Obviously.</p>
+  </div>
+</footer>
+
+<script>
+  const grid = document.getElementById('grid');
+  const hex = ch => 'U+' + ch.codePointAt(0).toString(16).toUpperCase().padStart(4, '0');
+  // only codepoints RON actually ships
+  const available = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789&#.,!/':;()[]-_*\"".split('');
+  grid.innerHTML = available.map(g => `<div class="cell"><div>${g === '&' ? '&amp;' : g === '<' ? '&lt;' : g}</div><span>${hex(g)}</span></div>`).join('');
+</script>
+</body>
+</html>
