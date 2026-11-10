@@ -89,7 +89,7 @@ Ron is free under the [SIL Open Font License 1.1](LICENSE): use it in commercial
 
 **RON TYPE** — drawn from a 61×61 hand-cut alphabet · traced exact · set in RON
 
-[`dist/`](dist/) · [`build/`](build/) · [`specimen.html`](dist/specimen.html) · [`LICENSE`](LICENSE)
+[`dist/`](dist/) · [`build/`](build/) · [`bitmaps/`](bitmaps/) · [`specimen.html`](dist/specimen.html) · [`LICENSE`](LICENSE)
 
 </div>
 

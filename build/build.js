@@ -15,7 +15,7 @@ const sharp = require('sharp');
 const opentype = require('opentype.js');
 const potrace = require('potrace');
 
-const SRC_DIR = path.resolve(__dirname, '..');
+const SRC_DIR = path.resolve(__dirname, '..', 'bitmaps');
 const DIST_DIR = path.resolve(__dirname, '..', 'dist');
 
 const UPM = 1000;

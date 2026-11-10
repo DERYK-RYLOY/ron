@@ -9,7 +9,7 @@ const fs = require('fs');
 const path = require('path');
 const sharp = require('sharp');
 
-const SRC = path.resolve(__dirname, '..');
+const SRC = path.resolve(__dirname, '..', 'bitmaps');
 
 const FILE = {
   A: 'a.png', B: '02_B.png', C: '03_C.png', D: '04_D.png', E: '05_E.png',
