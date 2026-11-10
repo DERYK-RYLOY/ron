@@ -92,3 +92,12 @@ Ron is free under the [SIL Open Font License 1.1](LICENSE): use it in commercial
 [`dist/`](dist/) · [`build/`](build/) · [`specimen.html`](dist/specimen.html) · [`LICENSE`](LICENSE)
 
 </div>
+
+<div align="center">
+
+<img src="assets/blackbox-grafx-logo.svg" width="46" alt="BLACKBOX GRAFX logo">
+
+<sub><b>SPECIAL THANKS — BLACKBOX GRAFX</b> · Freelance Concept Artist</sub><br>
+<sub>His art is what inspired RON — the vision behind this alphabet.</sub>
+
+</div>

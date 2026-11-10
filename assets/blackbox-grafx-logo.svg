@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="BLACKBOX GRAFX logo">
+<title>BLACKBOX GRAFX</title>
+<circle cx="100" cy="100" r="100" fill="#101010"/>
+<g fill="#ffffff">
+  <!-- top stroke with 45-degree down-right fold -->
+  <polygon points="52,54 108,54 132,78 52,78"/>
+  <!-- fold descending from the top stroke -->
+  <polygon points="108,54 130,54 164,88 142,88"/>
+  <!-- middle stroke -->
+  <polygon points="28,96 118,96 142,120 28,120"/>
+  <!-- bottom stroke, chamfered at both ends -->
+  <polygon points="86,134 110,134 134,158 62,158"/>
+</g>
+</svg>
