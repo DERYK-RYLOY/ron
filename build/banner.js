@@ -189,12 +189,11 @@ for (const scheme of SCHEMES) {
 .theme0{animation-name:theme0}.theme1{animation-name:theme1}.theme2{animation-name:theme2}.theme3{animation-name:theme3}.theme4{animation-name:theme4}
 .caretPos{animation-duration:${CYCLE}s;animation-iteration-count:infinite;animation-timing-function:linear}
 ${cssKeyframes}@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
-@media (prefers-reduced-motion: reduce){.l{animation:none!important;opacity:1!important}.theme{animation:none!important;opacity:0!important}.theme0{opacity:1!important}.blink{animation:none!important;opacity:1!important}}
 </style>
 ${themeGroups.join("\n")}
 </svg>
 `;
-  const out = `banner-${scheme.key}.svg`;
+  const out = `banner-v2-${scheme.key}.svg`;
   fs.writeFileSync(path.join(ASSETS, out), svg);
   console.log("wrote assets/" + out, `${maxW + 80}x${height}`);
 }
