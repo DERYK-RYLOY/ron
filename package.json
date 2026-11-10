@@ -1,0 +1,32 @@
+{
+  "name": "@deryk-ryloy/ron",
+  "version": "1.0.0",
+  "description": "RON — the all-caps display typeface for developers who ship taste. Five themes (Black, Mono, Dot, Scan, Outline), exact 0°/90°/45° lattice vectors, OTF + WOFF2. SIL Open Font License 1.1.",
+  "keywords": [
+    "font",
+    "typeface",
+    "display-font",
+    "ron",
+    "typography",
+    "developer-font",
+    "caps",
+    "opentype",
+    "woff2"
+  ],
+  "author": "DERYK-RYLOY",
+  "license": "OFL-1.1",
+  "homepage": "https://github.com/DERYK-RYLOY/ron",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DERYK-RYLOY/ron.git"
+  },
+  "bugs": "https://github.com/DERYK-RYLOY/ron/issues",
+  "files": [
+    "dist/",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
+}
