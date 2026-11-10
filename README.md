@@ -75,6 +75,30 @@ node braille.js "SHIP IT"   # BONUS: render any text as Unicode braille in RON
 | Not yet drawn | `@ = % ?` — PRs welcome |
 
 <picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/h-updates-dark.svg">
+  <img src="assets/h-updates-light.svg" width="380" alt="UPDATES.">
+</picture>
+
+**Ron gets updates — soon, and often.** This is a living font, not a frozen artifact, and updates and upgrades will land in a short period of time. The font will be cleaned further and more fixes will be made, on a rolling basis:
+
+- **Cleaner outlines, smaller files** — another pass of node reduction and outline tightening is already scheduled.
+- **More fixes** — every glyph that looks off at your size gets patched in the next drop. Report it, and it gets fixed.
+- **Kerning & hinting** — still on the roadmap, and still happening; they ship after the cleanup pass.
+- **The four missing glyphs** — `@ = % ?` are next in line.
+- **Visible drops, not silence** — every update lands in this repo. Watch it or star it and you'll see them ship.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/h-contributors-dark.svg">
+  <img src="assets/h-contributors-light.svg" width="490" alt="CONTRIBUTORS.">
+</picture>
+
+| Who | What they built |
+| --- | --- |
+| [@DERYK-RYLOY](https://github.com/DERYK-RYLOY) | Original design · master geometry · build pipeline · this README |
+
+That's the full roster today. Ron is open source — if you fix a glyph, add a kerning pair, or draw one of the missing four, you're a contributor. Open an issue or send a PR; credit gets given, never taken.
+
+<picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/h-license-dark.svg">
   <img src="assets/h-license-light.svg" width="240" alt="LICENSE.">
 </picture>
