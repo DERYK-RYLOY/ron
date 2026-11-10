@@ -31,16 +31,18 @@ const CYCLE = THEMES.length * SLICE;  // 32s
 const TARGET_W = 1120;
 
 const SEQUENCE = ["A", "B", "C", "1", "2", "3"];
-const APPEAR = { A: 0.4, B: 0.8, C: 1.2, "1": 3.2, "2": 3.6, "3": 4.0 };  // type times (slice-local, s)
-const VANISH = { A: 2.6, B: 2.2, C: 1.8, "1": 5.6, "2": 5.2, "3": 4.8 };  // backspace times
+// Human-like keystroke rhythm, baked in (irregular gaps, digits slower, deletes fast,
+// one long "thinking" pause before the digits — same feel as the reference demo)
+const APPEAR = { A: 0.34, B: 0.71, C: 1.08, "1": 3.12, "2": 3.62, "3": 4.03 };  // type times (slice-local, s)
+const VANISH = { A: 2.44, B: 2.26, C: 2.08, "1": 5.12, "2": 4.93, "3": 4.75 };  // backspace times
 
 // caret jumps: [time (slice-local), slot index into slots array]
 const JUMPS = [
   [0.0, 0],
-  [0.4, 1], [0.8, 2], [1.2, 3],
-  [1.8, 2], [2.2, 1], [2.6, 0],
-  [3.2, 4], [3.6, 5], [4.0, 6],
-  [4.8, 5], [5.2, 4], [5.6, 0],
+  [0.34, 1], [0.71, 2], [1.08, 3],
+  [2.08, 2], [2.26, 1], [2.44, 0],
+  [3.12, 4], [3.62, 5], [4.03, 6],
+  [4.75, 5], [4.93, 4], [5.12, 0],
 ];
 
 const SCHEMES = [
@@ -193,7 +195,7 @@ ${cssKeyframes}@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
 ${themeGroups.join("\n")}
 </svg>
 `;
-  const out = `banner-v2-${scheme.key}.svg`;
+  const out = `banner-v3-${scheme.key}.svg`;
   fs.writeFileSync(path.join(ASSETS, out), svg);
   console.log("wrote assets/" + out, `${maxW + 80}x${height}`);
 }

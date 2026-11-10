@@ -1,7 +1,7 @@
 <div align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/banner-v2-dark.svg">
-    <img src="assets/banner-v2-light.svg" width="880" alt="RON types ABC, backspaces, types 123, backspaces — cycling through all five RON styles">
+    <source media="(prefers-color-scheme: dark)" srcset="assets/banner-v3-dark.svg">
+    <img src="assets/banner-v3-light.svg" width="880" alt="RON types ABC, backspaces, types 123, backspaces — switching through all five RON styles — human-paced typing">
   </picture>
 </div>
 
