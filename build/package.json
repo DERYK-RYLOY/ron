@@ -7,9 +7,10 @@
   "author": "RON Type",
   "main": "build.js",
   "scripts": {
-    "build": "node build.js && node banner.js"
+    "build": "node build.js && node banner.js && node banner_gif.js"
   },
   "dependencies": {
+    "gifenc": "^1.0.3",
     "opentype.js": "^2.0.0",
     "potrace": "^2.1.8",
     "sharp": "^0.35.5",

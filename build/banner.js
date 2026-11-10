@@ -128,78 +128,56 @@ const themes = themesUnit.map(t => {
 });
 const maxW = TARGET_W;
 
-// ---------- keyframes (same for both color schemes) ----------
-let cssKeyframes = "";
-const themeGroups = [];
+// ---------- SMIL timeline (works in <img> on GitHub; CSS keyframes there don't step) ----------
+const fr = t => +(t / CYCLE).toFixed(4); // keyTimes are 0..1 fractions
 
-for (let k = 0; k < themes.length; k++) {
-  const t = themes[k];
-  const base = k * SLICE;
-  const basePct = k * (SLICE / CYCLE) * 100;
-  const hideAt = pct(base + 6.0);
-  const sliceEnd = pct(base + SLICE);
+function buildGroups(letterFill) {
+  const themeGroups = [];
+  for (let k = 0; k < themes.length; k++) {
+    const t = themes[k];
+    const base = k * SLICE;
+    const baseF = fr(base);
+    const hideAt = fr(base + 6.0);
 
-  // theme switcher: hard cut per slice (typewriter "page turn")
-  if (k === 0) {
-    cssKeyframes += `@keyframes theme0{0%,${hideAt}%{opacity:1}${hideAt}%,100%{opacity:0}}\n`;
-  } else {
-    cssKeyframes += `@keyframes theme${k}{0%,${pct(base - 0.01)}%{opacity:0}${pct(base)}%{opacity:0}${pct(base)}%,${hideAt}%{opacity:1}${hideAt}%,100%{opacity:0}}\n`;
-  }
+    // theme visibility window (hard cut per slice)
+    const themeAnim = k === 0
+      ? `<animate attributeName="opacity" values="1;1;0" keyTimes="0;${hideAt};1" calcMode="discrete" dur="${CYCLE}s" repeatCount="indefinite"/>`
+      : `<animate attributeName="opacity" values="0;1;1;0" keyTimes="0;${baseF};${hideAt};1" calcMode="discrete" dur="${CYCLE}s" repeatCount="indefinite"/>`;
 
-  // letters: appear instantly on keypress, vanish instantly on backspace
-  const letterEls = [];
-  t.letters.forEach((it, i) => {
-    const tOn = pct(base + APPEAR[it.ch]);
-    const tOff = pct(base + VANISH[it.ch]);
-    const name = `typ${k}_${i}`;
-    cssKeyframes += `@keyframes ${name}{0%,${tOn}%{opacity:0}${tOn}%{opacity:1}${tOff}%{opacity:1}${tOff}%,100%{opacity:0}}\n`;
-    letterEls.push(
-      `<path class="l" style="animation-name:${name}" transform="translate(${it.x.toFixed(1)},${baseline}) scale(${scale.toFixed(5)},${-scale.toFixed(5)})" d="${it.d}"/>`
+    // letters: instant appear on keypress, instant vanish on backspace
+    const letterEls = [];
+    t.letters.forEach(it => {
+      const tOn = fr(base + APPEAR[it.ch]);
+      const tOff = fr(base + VANISH[it.ch]);
+      letterEls.push(
+        `<path transform="translate(${it.x.toFixed(1)},${baseline}) scale(${scale.toFixed(5)},${-scale.toFixed(5)})" fill="${letterFill}" opacity="0" d="${it.d}"><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;${tOn};${tOff};1" calcMode="discrete" dur="${CYCLE}s" repeatCount="indefinite"/></path>`
+      );
+    });
+
+    // caret: discrete jumps at every key event, blinked by inner opacity animation
+    const jumps = JUMPS.map(([tS, slot]) => [fr(base + tS), t.slots[slot]]);
+    const values = jumps.map(([, s]) => `${s.toFixed(1)} 0`).join(";");
+    const keyTimes = jumps.map(([tt]) => tt).join(";");
+    themeGroups.push(
+      `<g transform="translate(${t.offsetX},0)" opacity="0">${themeAnim}\n` +
+      letterEls.join("\n") + "\n" +
+      `<g><animateTransform attributeName="transform" type="translate" values="${values}" keyTimes="${keyTimes}" calcMode="discrete" dur="${CYCLE}s" repeatCount="indefinite"/><g><animate attributeName="opacity" values="1;0" keyTimes="0;0.5" calcMode="discrete" dur="1.06s" repeatCount="indefinite"/><path fill="#d8ff3a" transform="translate(0,${baseline - CAP_PX})" d="M7 0H15L22 7V${CAP_PX - 7}L15 ${CAP_PX}H7L0 ${CAP_PX - 7}V7Z"/></g></g>\n` +
+      `</g>`
     );
-  });
-
-  // caret: instant jump on every keystroke and backspace, holds between events
-  const caretPoints = JUMPS.map(([tS, slot]) => [pct(base + tS), slot]);
-  let ck = `@keyframes caret${k}{`;
-  for (let i = 0; i < caretPoints.length; i++) {
-    const [p, slot] = caretPoints[i];
-    if (i === 0) ck += `0%{transform:translateX(${t.slots[slot].toFixed(1)}px)}`;
-    else {
-      const [pPrev, slotPrev] = caretPoints[i - 1];
-      ck += `${p}%{transform:translateX(${t.slots[slotPrev].toFixed(1)}px)}${p}%{transform:translateX(${t.slots[slot].toFixed(1)}px)}`;
-    }
   }
-  ck += `${hideAt}%{opacity:1}${hideAt}%{opacity:0}100%{opacity:0}}`;
-  cssKeyframes += ck + "\n";
-
-  themeGroups.push(
-    `<g class="theme theme${k}" transform="translate(${t.offsetX},0)">\n` +
-    letterEls.join("\n") + "\n" +
-    `<g class="caretPos" style="animation-name:caret${k}"><g class="blink"><path class="cursor" transform="translate(0,${baseline - CAP_PX})" d="M7 0H15L22 7V${CAP_PX - 7}L15 ${CAP_PX}H7L0 ${CAP_PX - 7}V7Z"/></g></g>\n` +
-    `</g>`
-  );
+  return themeGroups;
 }
 
 for (const scheme of SCHEMES) {
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-40 0 ${maxW + 80} ${height}" width="${maxW + 80}" height="${height}" role="img" aria-label="RON types ABC, deletes it, types 123, deletes it — cycling through all five RON themes">
-<title>RON — typewriter animation across five themes</title>
-<style>
-.l{fill:${scheme.letter};opacity:0;animation-duration:${CYCLE}s;animation-iteration-count:infinite;animation-timing-function:linear}
-.cursor{fill:#d8ff3a}
-.blink{animation:blink 0.9s steps(1,end) infinite}
-.theme{opacity:0;animation-duration:${CYCLE}s;animation-iteration-count:infinite;animation-timing-function:linear}
-.theme0{animation-name:theme0}.theme1{animation-name:theme1}.theme2{animation-name:theme2}.theme3{animation-name:theme3}.theme4{animation-name:theme4}
-.caretPos{animation-duration:${CYCLE}s;animation-iteration-count:infinite;animation-timing-function:linear}
-${cssKeyframes}@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
-</style>
-${themeGroups.join("\n")}
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-40 0 ${maxW + 80} ${height}" width="${maxW + 80}" height="${height}" role="img" aria-label="RON types ABC, backspaces, types 123, backspaces — cycling through all five RON styles">
+<title>RON — typewriter animation across five styles</title>
+${buildGroups(scheme.letter).join("\n")}
 </svg>
 `;
-  const out = `banner-v3-${scheme.key}.svg`;
+  const out = `banner-v4-${scheme.key}.svg`;
   fs.writeFileSync(path.join(ASSETS, out), svg);
   console.log("wrote assets/" + out, `${maxW + 80}x${height}`);
 }
-
 // ---------- RON Black headings (light + dark variants) ----------
 const ronBlack = loadFont(THEMES[0].file);
 const HEADS = [
